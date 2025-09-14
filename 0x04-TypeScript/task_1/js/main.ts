@@ -25,8 +25,3 @@ class StudentClass implements StudentClassInterface {
     return this.firstName;
   }
 }
-
-// مثال للاستخدام
-const student = new StudentClass({ firstName: 'Alice', lastName: 'Smith' });
-console.log(student.displayName()); // Alice
-console.log(student.workOnHomework()); // Currently working

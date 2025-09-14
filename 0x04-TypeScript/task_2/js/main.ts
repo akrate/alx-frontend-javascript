@@ -47,6 +47,6 @@ function createEmployee(salary: number | string): Director | Teacher {
 }
 
 // Tests
-console.log(createEmployee(200).constructor.name); // Teacher
-console.log(createEmployee(1000).constructor.name); // Director
-console.log(createEmployee('$500').constructor.name); // Director
+console.log(createEmployee(200).constructor.name);
+console.log(createEmployee(1000).constructor.name);
+console.log(createEmployee('$500').constructor.name); 

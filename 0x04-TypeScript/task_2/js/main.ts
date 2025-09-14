@@ -51,12 +51,12 @@ export function createEmployee(salary: number | string): Director | Teacher {
   return new Director();
 }
 
-// Type predicate
+// Type predicate to check if employee is Director
 export function isDirector(employee: Director | Teacher): employee is Director {
   return employee instanceof Director;
 }
 
-// executeWork function
+// Execute work depending on employee type
 export function executeWork(employee: Director | Teacher): string {
   if (isDirector(employee)) {
     return employee.workDirectorTasks();
@@ -64,10 +64,10 @@ export function executeWork(employee: Director | Teacher): string {
   return employee.workTeacherTasks();
 }
 
-// Subjects literal type
+// String literal type Subjects
 export type Subjects = 'Math' | 'History';
 
-// teachClass function with exact signature
+// teachClass function
 export function teachClass(todayClass: Subjects): string {
   if (todayClass === 'Math') {
     return 'Teaching Math';

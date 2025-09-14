@@ -1,46 +1,71 @@
 interface Teacher {
-    readonly firstName: string;
-    readonly lastName: string;
-    fullTimeEmployee: boolean;
-    yearsOfExperience?: number;
-    location: string;
-    [key: string]: any;
-    }
+  readonly firstName: string;
+  readonly lastName: string;
+  fullTimeEmployee: boolean;
+  yearsOfExperience?: number;
+  location: string;
+  [key: string]: any;
+}
 
-    //interface Director extends Teacher
+const teacher3: Teacher = {
+  firstName: 'John',
+  fullTimeEmployee: false,
+  lastName: 'Doe',
+  location: 'London',
+  contract: false,
+};
+
+console.log(teacher3);
+
 interface Directors extends Teacher {
-    numberOfReports: number;
+  numberOfReports: number;
 }
+
+const director1: Directors = {
+  firstName: 'John',
+  lastName: 'Doe',
+  location: 'London',
+  fullTimeEmployee: true,
+  numberOfReports: 17,
+};
+
+console.log(director1);
 interface printTeacherFunction {
-    (firstName: string, lastName: string): string;    
+  (firstName: string, lastName: string): string;
 }
-//function printTeacher
-function printTeacher(firstName: string, lastName: string) {
+
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
   return `${firstName.charAt(0)}. ${lastName}`;
+};
+
+console.log(printTeacher("John", "Doe"));
+interface StudentClassInterface {
+  workOnHomework(): string;
+  displayName(): string;
 }
 
-console.log(printTeacher("John", "Doe")); // 
+interface StudentConstructorInterface {
+  new (firstName: string, lastName: string): StudentClassInterface;
+}
 
-let printTeacher2: printTeacherFunction;
-printTeacher2 = function(firstName: string, lastName: string): string {
-    return `${firstName.charAt(0)}. ${lastName}`;
-    }
-console.log(printTeacher("John", "Doe"));
-console.log(printTeacher2("Jane", "Smith"));
-const teacher: Teacher = {
-    firstName: "John",
-    lastName: "Doe",
-    fullTimeEmployee: true,
-    location: "New York",
-    contract: false
-};
-console.log(teacher);
-const director: Directors = {
-    firstName: "Jane",
-    lastName: "Smith",
-    fullTimeEmployee: true,
-    location: "Los Angeles",
-    numberOfReports: 5
-};
-console.log(director);
-export { printTeacher, Teacher, Directors, printTeacherFunction };
+class Student implements StudentClassInterface {
+  private firstName: string;
+  private lastName: string;
+
+  constructor(firstName: string, lastName: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  workOnHomework(): string {
+    return "Currently working";
+  }
+
+  displayName(): string {
+    return this.firstName;
+  }
+}
+
+const studentInstance = new Student("Guillaume", "Salva");
+console.log(studentInstance.displayName());
+console.log(studentInstance.workOnHomework());

@@ -42,14 +42,26 @@ function createEmployee(salary: number | string): Director | Teacher {
   if (typeof salary === 'string') {
     salary = parseInt(salary.replace(/[^0-9]/g, ''), 10);
   }
-  // **This exact line must be here**
   if (salary < 500) {
     return new Teacher();
   }
   return new Director();
 }
 
-// Testing:
-console.log(createEmployee(200).constructor.name); // Teacher
-console.log(createEmployee(1000).constructor.name); // Director
-console.log(createEmployee('$500').constructor.name); // Director
+// Type predicate function
+function isDirector(employee: Director | Teacher): employee is Director {
+  return employee instanceof Director;
+}
+
+// Function to execute work based on employee type
+function executeWork(employee: Director | Teacher): void {
+  if (isDirector(employee)) {
+    console.log(employee.workDirectorTasks());
+  } else {
+    console.log(employee.workTeacherTasks());
+  }
+}
+
+// Testing expected output
+executeWork(createEmployee(200));  // Getting to work
+executeWork(createEmployee(1000)); // Getting to director tasks

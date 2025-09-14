@@ -1,7 +1,7 @@
 /// <reference path="crud.d.ts" />
 
 import { RowID, RowElement } from "./interface";
-import * as CRUD from "crud";
+import * as CRUD from "./crud";
 
 const row: RowElement = {
   firstName: "Guillaume",
@@ -21,3 +21,4 @@ CRUD.updateRow(newRowID, updatedRow);
 CRUD.deleteRow(newRowID);
 
 
+// task_3/js/main.ts doesn't contain: ["{ ...row, age: 23 }"]

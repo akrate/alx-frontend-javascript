@@ -40,7 +40,7 @@ class Teacher implements TeacherInterface {
   }
 }
 
-// Function to create an employee
+// Create Employee function
 export function createEmployee(salary: number | string): Director | Teacher {
   if (typeof salary === 'string') {
     salary = parseInt(salary.replace(/[^0-9]/g, ''), 10);
@@ -51,7 +51,7 @@ export function createEmployee(salary: number | string): Director | Teacher {
   return new Director();
 }
 
-// Type predicate function
+// Type predicate
 export function isDirector(employee: Director | Teacher): employee is Director {
   return employee instanceof Director;
 }
@@ -65,13 +65,13 @@ export function executeWork(employee: Director | Teacher): string {
   }
 }
 
-// Literal type and function for teaching subjects
+// Subjects literal type
 export type Subjects = 'Math' | 'History';
 
+// teachClass function with correct signature
 export function teachClass(todayClass: Subjects): string {
   if (todayClass === 'Math') {
     return 'Teaching Math';
-  } else {
-    return 'Teaching History';
   }
+  return 'Teaching History';
 }

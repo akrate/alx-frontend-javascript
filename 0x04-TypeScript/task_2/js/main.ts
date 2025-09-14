@@ -1,53 +1,11 @@
-interface DirectorInterface {
-  workFromHome(): string;
-  getCoffeeBreak(): string;
-  workDirectorTasks(): string;
-}
+// Assuming Director and Teacher classes + createEmployee are defined as before
 
-interface TeacherInterface {
-  workFromHome(): string;
-  getCoffeeBreak(): string;
-  workTeacherTasks(): string;
-}
-
-class Director implements DirectorInterface {
-  workFromHome(): string {
-    return 'Working from home';
-  }
-  getCoffeeBreak(): string {
-    return 'Getting a coffee break';
-  }
-  workDirectorTasks(): string {
-    return 'Getting to director tasks';
-  }
-}
-
-class Teacher implements TeacherInterface {
-  workFromHome(): string {
-    return 'Cannot work from home';
-  }
-  getCoffeeBreak(): string {
-    return 'Cannot have a break';
-  }
-  workTeacherTasks(): string {
-    return 'Getting to work';
-  }
-}
-
-function createEmployee(salary: number | string): Director | Teacher {
-  if (typeof salary === 'string') {
-    salary = parseInt(salary.replace(/[^0-9]/g, ''), 10);
-  }
-  if (salary < 500) {
-    return new Teacher();
-  }
-  return new Director();
-}
-
+// Type predicate function to check if employee is Director
 function isDirector(employee: Director | Teacher): employee is Director {
   return employee instanceof Director;
 }
 
+// Function that executes the proper work method depending on employee type
 function executeWork(employee: Director | Teacher): void {
   if (isDirector(employee)) {
     console.log(employee.workDirectorTasks());
@@ -55,3 +13,7 @@ function executeWork(employee: Director | Teacher): void {
     console.log(employee.workTeacherTasks());
   }
 }
+
+// Example usage - these should produce the expected output:
+executeWork(createEmployee(200));  // Output: Getting to work
+executeWork(createEmployee(1000)); // Output: Getting to director tasks

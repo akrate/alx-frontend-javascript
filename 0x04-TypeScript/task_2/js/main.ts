@@ -48,12 +48,10 @@ function createEmployee(salary: number | string): Director | Teacher {
   return new Director();
 }
 
-// Type predicate function
 function isDirector(employee: Director | Teacher): employee is Director {
   return employee instanceof Director;
 }
 
-// Function to execute work based on employee type
 function executeWork(employee: Director | Teacher): void {
   if (isDirector(employee)) {
     console.log(employee.workDirectorTasks());
@@ -62,6 +60,6 @@ function executeWork(employee: Director | Teacher): void {
   }
 }
 
-// Testing expected output
-executeWork(createEmployee(200));  // Getting to work
-executeWork(createEmployee(1000)); // Getting to director tasks
+// Example usage:
+executeWork(createEmployee(200));  // Output: Getting to work
+executeWork(createEmployee(1000)); // Output: Getting to director tasks

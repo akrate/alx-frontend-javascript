@@ -1,29 +1,26 @@
-// Define the Teacher interface
 interface Teacher {
-  readonly firstName: string;
-  readonly lastName: string;
-  fullTimeEmployee: boolean;
-  yearsOfExperience?: number;
-  location: string;
-  [key: string]: any;
-}
+    readonly firstName: string;
+    readonly lastName: string;
+    fullTimeEmployee: boolean;
+    yearsOfExperience?: number;
+    location: string;
+    [key: string]: any;
+    }
 
-// Extend Teacher to create Directors interface
+    //interface Director extends Teacher
 interface Directors extends Teacher {
-  numberOfReports: number;
+    numberOfReports: number;
+}
+function printTeacher(firstName: string, lastName: string): string {
+    return `${firstName.charAt(0)}. ${lastName}`;
+    }
+
+    
+    interface printTeacherFunction {
+        (firstName: string, lastName: string): string;
+        
 }
 
-// Define the function type interface
-interface printTeacherFunction {
-  (firstName: string, lastName: string): string;
-}
-
-// Implement the printTeacher function
-const printTeacher: printTeacherFunction = (firstName, lastName) => {
-  return `${firstName.charAt(0)}. ${lastName}`;
-};
-
-// Example usage of Directors
 const director1: Directors = {
   firstName: 'John',
   lastName: 'Doe',
@@ -31,6 +28,4 @@ const director1: Directors = {
   fullTimeEmployee: true,
   numberOfReports: 17,
 };
-
-console.log(printTeacher('John', 'Doe')); // Output: J. Doe
 console.log(director1);

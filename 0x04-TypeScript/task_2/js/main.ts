@@ -1,19 +1,61 @@
-// Assuming Director and Teacher classes + createEmployee are defined as before
-
-// Type predicate function to check if employee is Director
-function isDirector(employee: Director | Teacher): employee is Director {
-  return employee instanceof Director;
+interface DirectorInterface {
+  workFromHome(): string;
+  getCoffeeBreak(): string;
+  workDirectorTasks(): string;
 }
 
-// Function that executes the proper work method depending on employee type
-function executeWork(employee: Director | Teacher): void {
-  if (isDirector(employee)) {
-    console.log(employee.workDirectorTasks());
-  } else {
-    console.log(employee.workTeacherTasks());
+interface TeacherInterface {
+  workFromHome(): string;
+  getCoffeeBreak(): string;
+  workTeacherTasks(): string;
+}
+
+class Director implements DirectorInterface {
+  workFromHome(): string {
+    return 'Working from home';
+  }
+
+  getCoffeeBreak(): string {
+    return 'Getting a coffee break';
+  }
+
+  workDirectorTasks(): string {
+    return 'Getting to director tasks';
   }
 }
 
-// Example usage - these should produce the expected output:
-executeWork(createEmployee(200));  // Output: Getting to work
-executeWork(createEmployee(1000)); // Output: Getting to director tasks
+class Teacher implements TeacherInterface {
+  workFromHome(): string {
+    return 'Cannot work from home';
+  }
+
+  getCoffeeBreak(): string {
+    return 'Cannot have a break';
+  }
+
+  workTeacherTasks(): string {
+    return 'Getting to work';
+  }
+}
+
+export function createEmployee(salary: number | string): Director | Teacher {
+  if (typeof salary === 'string') {
+    salary = parseInt(salary.replace(/[^0-9]/g, ''), 10);
+  }
+  if (salary < 500) {
+    return new Teacher();
+  }
+  return new Director();
+}
+
+export function isDirector(employee: Director | Teacher): employee is Director {
+  return employee instanceof Director;
+}
+
+export function executeWork(employee: Director | Teacher): string {
+  if (isDirector(employee)) {
+    return employee.workDirectorTasks();
+  } else {
+    return employee.workTeacherTasks();
+  }
+}
